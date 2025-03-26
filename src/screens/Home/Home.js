@@ -11,9 +11,20 @@ const Home = ({ isDarkMode, toggleTheme, isLoggedIn, onLogout }) => {
   const [output, setOutput] = useState('');
   const [history, setHistory] = useState([]);
 
+
   const convertToTypeScript = () => {
     try {
-      const parsedInput = JSON.parse(input);
+      let parsedInput;
+      try {
+        parsedInput = JSON.parse(input);
+      } catch (jsonError) {
+        try {
+          parsedInput = new Function(`return ${input};`)();
+        } catch (jsError) {
+          throw new Error('Input is neither valid JSON nor valid JavaScript object');
+        }
+      }
+  
       if (typeof parsedInput === 'object' && !Array.isArray(parsedInput) && parsedInput !== null) {
         const interfaceString = generateInterface('GeneratedInterface', parsedInput);
         setOutput(interfaceString);
@@ -22,10 +33,9 @@ const Home = ({ isDarkMode, toggleTheme, isLoggedIn, onLogout }) => {
         setOutput(typeString);
       }
     } catch (error) {
-      setOutput('Invalid JSON input. Please provide a valid object or value.');
+      setOutput('Invalid input. Please provide a valid JSON object or JavaScript object literal.');
     }
   };
-
   const generateInterface = (interfaceName, obj, indentLevel = 0) => {
     const indent = '  '.repeat(indentLevel);
     let interfaceString = `interface ${interfaceName} {\n`;
@@ -60,7 +70,6 @@ const Home = ({ isDarkMode, toggleTheme, isLoggedIn, onLogout }) => {
       const arrayType = getType(value[0], key, indentLevel);
       return `${arrayType}[]`;
     } else if (typeof value === 'object') {
-      // Create an inline object type with proper indentation
       let objectType = '{\n';
       
       for (const objKey in value) {
