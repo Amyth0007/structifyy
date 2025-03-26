@@ -5,7 +5,7 @@ import LineNumbers from '../../components/LineNumbers/LineNumbers';
 import './Home.css';
 import { environments } from '../../environments/environments';
 import { toast } from 'react-toastify';
-
+ 
 const Home = ({ isDarkMode, toggleTheme, isLoggedIn, onLogout }) => {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
