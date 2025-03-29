@@ -102,7 +102,7 @@ const Navbar = ({ isDarkMode, toggleTheme, isLoggedIn, onLogout }) => {
           Hi,{' '}
           <span className="username">
             {user ? displayedUsername : 'Dev'}
-            {showCursor && <span className="cursor">|</span>}
+            {showCursor && <span className="cursor"></span>}
           </span>
         </p>
       </div>

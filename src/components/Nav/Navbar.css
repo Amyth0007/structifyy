@@ -165,8 +165,9 @@
 
 .cursor {
   display: inline-block;
-  width: 2px;
-  height: 1em;
+  width: 2.4px;
+  height: 0.8em;
+  /* margin-top: 2px; */
   background-color: 	#ffd3b2;
   animation: blink 1s infinite;
 }
