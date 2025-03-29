@@ -11,7 +11,12 @@ const Home = ({ isDarkMode, toggleTheme, isLoggedIn, onLogout }) => {
   const [output, setOutput] = useState('');
   const [history, setHistory] = useState([]);
 
-
+  useEffect(() => {
+    if (!isLoggedIn) {
+     setHistory([])
+    }
+  }, [isLoggedIn]);
+  
   const convertToTypeScript = () => {
     try {
       let parsedInput;
@@ -104,9 +109,7 @@ const Home = ({ isDarkMode, toggleTheme, isLoggedIn, onLogout }) => {
 
   const formatOutput = () => {
     try {
-      // Split the output into lines
       const lines = output.split('\n');
-      // Indent each line with 2 spaces
       const formattedOutput = lines.map(line => `  ${line}`).join('\n');
       setOutput(formattedOutput);
     } catch (err) {

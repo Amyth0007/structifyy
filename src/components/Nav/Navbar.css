@@ -182,3 +182,64 @@
   }
 }
 
+
+/* Logout Popup */
+.logout-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+/* Light Mode */
+.light-mode .logout-popup {
+  background-color: #fff;
+  color: #333;
+}
+
+/* Dark Mode */
+.dark-mode .logout-popup {
+  background-color: #2d2d2d;
+  color: #d4d4d4;
+}
+
+/* Buttons */
+.logout-popup button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 10px;
+  transition: background 0.2s ease-in-out;
+}
+
+.logout-popup .confirm-logout {
+  background-color: #ff6b6b;
+  color: #fff;
+}
+
+.logout-popup .confirm-logout:hover {
+  background-color: #ff4d4d;
+}
+
+.logout-popup .cancel-logout {
+  background-color: #ffd3b2;
+  color: #333;
+}
+
+.logout-popup .cancel-logout:hover {
+  background-color: #f0a07e;
+}
+.tagline {
+  font-size: 14px;
+  color: gray;
+  margin-top: 5px;
+}
+

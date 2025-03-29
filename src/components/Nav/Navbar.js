@@ -11,7 +11,8 @@ const Navbar = ({ isDarkMode, toggleTheme, isLoggedIn, onLogout }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [displayedUsername, setDisplayedUsername] = useState('');
-  const [showCursor, setShowCursor] = useState(true); // Cursor visibility state
+  const [showCursor, setShowCursor] = useState(true);
+  const [showLogoutPopup, setShowLogoutPopup] = useState(false);
 
   const fetchHistory = async () => {
     try {
@@ -37,7 +38,6 @@ const Navbar = ({ isDarkMode, toggleTheme, isLoggedIn, onLogout }) => {
 
   const handleMenuClick = () => setIsMenuOpen(!isMenuOpen);
 
-  // Typewriter effect for username
   useEffect(() => {
     if (user) {
       let currentIndex = 0;
@@ -47,18 +47,34 @@ const Navbar = ({ isDarkMode, toggleTheme, isLoggedIn, onLogout }) => {
           currentIndex++;
         } else {
           clearInterval(interval);
-          setShowCursor(false); // Hide cursor after typing is complete
+          setShowCursor(false);
         }
-      }, 100); // Adjust the speed (milliseconds per letter)
-      return () => clearInterval(interval); // Cleanup on unmount
+      }, 100);
+      return () => clearInterval(interval);
     }
   }, [user]);
+
+  const handleLogoutClick = () => {
+    setShowLogoutPopup(true);
+  };
+
+  const confirmLogout = () => {
+    setShowLogoutPopup(false);
+    setUser(null)
+    onLogout();
+  };
+
+  const cancelLogout = () => {
+    setShowLogoutPopup(false);
+  };
 
   return (
     <div className="navbar-container">
       <nav className={`navbar ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
         <div className="navbar-left">
-          <h1>JSON to TS</h1>
+          <div>
+            <h1>Structify </h1>
+            <p className="tagline">JSON to TypeScript in a click</p> </div>
           <div className="menu-items">
             <button className="menu-icon-dark" onClick={toggleTheme}>
               {isDarkMode ? <Dark /> : <Light />}
@@ -71,7 +87,7 @@ const Navbar = ({ isDarkMode, toggleTheme, isLoggedIn, onLogout }) => {
         <div className={`navbar-right ${isMenuOpen ? 'open' : ''}`}>
           {isLoggedIn ? (
             <>
-              <button onClick={onLogout}>Logout</button>
+              <button onClick={handleLogoutClick}>Logout</button>
             </>
           ) : (
             <>
@@ -90,6 +106,19 @@ const Navbar = ({ isDarkMode, toggleTheme, isLoggedIn, onLogout }) => {
           </span>
         </p>
       </div>
+
+      {/* Logout Confirmation Popup */}
+      {showLogoutPopup && (
+        <div className="logout-popup">
+          <div className="popup-content">
+            <p>Are you sure you want to logout?</p>
+            <div className="popup-buttons">
+              <button onClick={confirmLogout} className="confirm-btn">Yes</button>
+              <button onClick={cancelLogout} className="cancel-btn">No</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
