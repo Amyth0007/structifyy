@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as MenuIcon } from '../../assets/menu.svg';
 import { ReactComponent as Dark } from '../../assets/dark.svg';
 import { ReactComponent as Light } from '../../assets/light.svg';
-import './Navbar.css';
+import { ReactComponent as MenuIcon } from '../../assets/menu.svg';
 import { environments } from '../../environments/environments';
+import './Navbar.css';
 
 const Navbar = ({ isDarkMode, toggleTheme, isLoggedIn, onLogout }) => {
   const navigate = useNavigate();
@@ -101,7 +101,7 @@ const Navbar = ({ isDarkMode, toggleTheme, isLoggedIn, onLogout }) => {
         <p>
           Hi,{' '}
           <span className="username">
-            {user ? displayedUsername : 'user'}
+            {user ? displayedUsername : 'Dev'}
             {showCursor && <span className="cursor">|</span>}
           </span>
         </p>
