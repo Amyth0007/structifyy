@@ -164,11 +164,11 @@ const Home = ({ isDarkMode, toggleTheme, isLoggedIn, onLogout }) => {
       const response = await fetch(environments.apiUrl+'/api/history/fetch', {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
-      console.log(response);
-      
+      if(response.status == 400){
+        toast.info("session expired, please login to continue")
+        return;
+      }
       const data = await response.json();
-      console.log(data);
-      
       if(data){
         setHistory(data);
       }else{

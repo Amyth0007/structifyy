@@ -85,9 +85,7 @@ const AuthForm = ({ onSubmit, buttonText, isDarkMode }) => {
     }
 
     // If all validations pass, submit the form
-    if (buttonText === 'Sign Up') {
-      console.log("Sign up",username, email, password);
-      
+    if (buttonText === 'Sign Up') {      
       onSubmit({ username, email, password });
     } else {
       onSubmit({ email, password });

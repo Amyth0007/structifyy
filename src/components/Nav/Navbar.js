@@ -20,6 +20,11 @@ const Navbar = ({ isDarkMode, toggleTheme, isLoggedIn, onLogout }) => {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       const data = await response.json();
+      if(response.status == 400){
+        localStorage.removeItem('token');
+        onLogout()
+        return
+      }
       if (data) {
         setUser(data);
       } else {
@@ -85,6 +90,9 @@ const Navbar = ({ isDarkMode, toggleTheme, isLoggedIn, onLogout }) => {
           </div>
         </div>
         <div className={`navbar-right ${isMenuOpen ? 'open' : ''}`}>
+        <button className="menu-icon-dark-1" onClick={toggleTheme}>
+              {isDarkMode ? <Dark /> : <Light />}
+            </button> 
           {isLoggedIn ? (
             <>
               <button onClick={handleLogoutClick}>Logout</button>

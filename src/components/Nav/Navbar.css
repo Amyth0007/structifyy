@@ -46,6 +46,18 @@
   width: 24px; /* Adjust the size of the SVG icon */
   height: 24px; /* Adjust the size of the SVG icon */
 }
+.menu-icon-dark-1 {
+  display: none; /* Hide by default */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.menu-icon-dark-1 svg {
+  width: 24px; /* Adjust the size of the SVG icon */
+  height: 24px; /* Adjust the size of the SVG icon */
+}
 
 .navbar-right {
   display: flex;
@@ -99,6 +111,9 @@
   justify-content: center;
 }
 
+.menu-icon-dark-1 {
+  display: block; /* Show the hamburger menu on mobile */
+}
 /* Responsive Design */
 @media (max-width: 768px) {
   .menu-icon {
@@ -106,6 +121,9 @@
   }
   .menu-icon-dark {
     display: block; /* Show the hamburger menu on mobile */
+  }
+  .menu-icon-dark-1 {
+    display: none; /* Show the hamburger menu on mobile */
   }
 
   .navbar-right {
